@@ -1,0 +1,19 @@
+<div class="container">
+  <table class="profile-table">
+    <tr>
+      <td><p class="label">Name:</p></td>
+      <td><p class="value">{{userData.firstName}}</p></td>
+    </tr>
+    <tr>
+      <td><p class="label">Surname:</p></td>
+      <td><p class="value">{{userData.lastName}}</p></td>
+    </tr>
+    <tr>
+      <td><p class="label">Email:</p></td>
+      <td><p class="value">{{userData.email}}</p></td>
+    </tr>
+  </table>
+  <button class="delete-button" mat-stroked-button (click)="deleteAccount();">
+    Delete Account
+  </button>
+</div>

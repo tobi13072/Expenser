@@ -1,0 +1,56 @@
+@use '@angular/material' as mat;
+
+mat-card {
+  width: fit-content;
+  block-size: fit-content;
+
+  .row {
+    label {
+      margin-right: 1%;
+    }
+  }
+}
+
+.form-sign-up {
+  margin-top: 15%;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-card {
+  // background-color: lightgray;
+}
+
+mat-card-header {
+  margin-bottom: 4%;
+  // background-color: lightgray;
+}
+
+mat-card-content {
+  // background-color: lightgray;
+  button {
+    margin-right: 2%;
+  }
+
+  mat-form-field {
+    min-width: 400px;
+    width: 100%;
+  }
+}
+
+mat-flat-button {
+  offset-position: top 50px;
+}
+
+mar-error {
+  margin-bottom: 2%;
+}
+
+.button-container .spacer {
+  flex: 1;
+}

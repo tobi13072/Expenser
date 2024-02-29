@@ -1,0 +1,65 @@
+<form [formGroup]="expenseForm" (ngSubmit)="onSaveForm()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field class="scale-x">
+        <mat-label>Expense Name</mat-label>
+        <input matInput type="text" formControlName="expenseName">
+        <mat-error *ngIf="expenseForm.controls['expenseName'].hasError('required')">
+          Expense Name is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="scale-x">
+        <mat-label>Expense</mat-label>
+        <mat-select formControlName="expenseCategory">
+          <mat-option value="Groceries">Groceries</mat-option>
+          <mat-option value="Rent">Rent</mat-option>
+          <mat-option value="Utilities">Utilities</mat-option>
+          <mat-option value="Transportation">Transportation</mat-option>
+          <mat-option value="Dining Out">Dining Out</mat-option>
+          <mat-option value="Entertainment">Entertainment</mat-option>
+          <mat-option value="Clothing">Clothing</mat-option>
+          <mat-option value="Healthcare">Healthcare</mat-option>
+          <mat-option value="Travel">Travel</mat-option>
+          <mat-option value="Education">Education</mat-option>
+        </mat-select>
+        <mat-error *ngIf="expenseForm.controls['expenseCategory'].hasError('required')">
+          Expense name is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="scale-x">
+        <mat-label>Payment Method</mat-label>
+        <mat-select formControlName="paymentMethod">
+          <mat-option value="Card">Card</mat-option>
+          <mat-option value="Cash">Cash</mat-option>
+        </mat-select>
+        <mat-error *ngIf="expenseForm.controls['paymentMethod'].hasError('required')">
+          Payment Method is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput type="number"  formControlName="price">
+        <mat-error *ngIf="expenseForm.controls['price'].hasError('required')">
+          Price is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Count</mat-label>
+        <input matInput type="number" formControlName="count">
+        <mat-error *ngIf="expenseForm.controls['count'].hasError('required')">
+          Count is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-flat-button type="button" (click)="closeForm()">Cancel</button>
+    <button mat-flat-button type="submit">{{data ? 'Update' : 'Save'}}</button>
+  </div>
+</form>

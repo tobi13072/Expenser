@@ -1,0 +1,55 @@
+<div class="container" xmlns:p="http://www.w3.org/1999/html">
+  <form class="form-sign-in" [formGroup]="signinForm" (ngSubmit)="loginUser()">
+    <mat-card class="custom-shadow">
+      <mat-card-header>
+        <mat-card-title>Sign-in</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table>
+          <tr>
+            <td>
+              <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email">
+                <mat-error *ngIf="signinForm.controls['email'].hasError('required')">
+                  Email is required
+                </mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password">
+                <mat-error *ngIf="signinForm.controls['password'].hasError('required')">
+                  Password is required
+                </mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <mat-error *ngIf="signinForm.hasError('email_or_password_invalid')">
+                Email or password is invalid
+              </mat-error>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <button mat-flat-button type="reset">Clear</button>
+              <button mat-flat-button type="submit">Sign in</button>
+              <div class="spacer"></div>
+              <button mat-flat-button *ngIf="!this.authService.isLoggedIn" routerLinkActive="active" routerLink="/sign-up">
+                Don't have account yet? Create one!
+              </button>
+            </td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

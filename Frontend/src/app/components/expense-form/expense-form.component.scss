@@ -1,0 +1,28 @@
+.content {
+  padding: 2%;
+}
+
+.row {
+  display: flex;
+  color: #666666;
+  gap: 2%;
+
+  .scale-x {
+    box-sizing: content-box;
+    width: 100%;
+    height: fit-content;
+  }
+
+  .scale-y {
+
+  }
+}
+
+.actions {
+  padding-bottom: 3%;
+  padding-left: 2%;
+}
+
+mat-error {
+  margin-bottom: 3%;
+}
