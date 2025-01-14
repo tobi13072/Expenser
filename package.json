@@ -1,0 +1,12 @@
+{
+    "name": "expenser",
+    "version": "1.0.0",
+    "scripts": {
+        "start-backend": "npm run dev --prefix ./Backend",
+        "start-frontend": "npm start --prefix ./Frontend",
+        "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\""
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}
