@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const CONNECTION_URL = process.env.MONGODB_URI;
+const CONNECTION_URL = "mongodb+srv://expenser-db:admin@cluster0.dgk4a.mongodb.net/";
 
 function connect() {
     mongoose.connect(CONNECTION_URL, { useNewUrlParser: true})
