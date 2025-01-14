@@ -1,5 +1,5 @@
 <div class="auth-wrapper">
-  <div class="container">
+  <div class="container" [@fadeInOut]>
     <div class="row">
       <form class="form-sign-up" [formGroup]="signupForm" (ngSubmit)="registerUser()">
         <mat-card class="custom-shadow">
@@ -12,11 +12,9 @@
                 <td>
                   <mat-form-field>
                     <mat-label>First name</mat-label>
-                    <input matInput formControlName="firstName">
-                    <mat-error *ngIf="signupForm.controls['firstName'].invalid && (signupForm.controls['firstName'].dirty || signupForm.controls['firstName'].touched)">
-                      <span *ngIf="signupForm.controls['firstName'].hasError('required')">
-                        Firstname is required
-                      </span>
+                    <input matInput formControlName="firstName" type="text">
+                    <mat-error *ngIf="signupForm.controls['firstName'].hasError('required')">
+                      First name is required
                     </mat-error>
                   </mat-form-field>
                 </td>
@@ -26,9 +24,9 @@
                 <td>
                   <mat-form-field>
                     <mat-label>Last name</mat-label>
-                    <input matInput formControlName="lastName">
+                    <input matInput formControlName="lastName" type="text">
                     <mat-error *ngIf="signupForm.controls['lastName'].hasError('required')">
-                      Lastname is required
+                      Last name is required
                     </mat-error>
                   </mat-form-field>
                 </td>
@@ -42,11 +40,8 @@
                     <mat-error *ngIf="signupForm.controls['email'].hasError('required')">
                       Email is required
                     </mat-error>
-                    <mat-error *ngIf="signupForm.controls['email'].hasError('email_already_assigned')">
-                      Email already exists
-                    </mat-error>
                     <mat-error *ngIf="signupForm.controls['email'].hasError('email')">
-                      Email has invalid format
+                      Invalid email format
                     </mat-error>
                   </mat-form-field>
                 </td>
@@ -63,12 +58,16 @@
                   </mat-form-field>
                 </td>
               </tr>
+
+              <tr>
+                <td class="button-row">
+                  <button mat-flat-button class="sign-up-button" type="submit" [disabled]="signupForm.invalid">Let's get started!</button>
+                  <button mat-flat-button class="login-button" routerLink="/sign-in">
+                    Have account? Log in
+                  </button>
+                </td>
+              </tr>
             </table>
-            <button mat-flat-button type="reset">Clear</button>
-            <button mat-flat-button type="submit">Lets get started!</button>
-            <button mat-flat-button *ngIf="!this.authService.isLoggedIn" routerLinkActive="active" routerLink="/sign-in">
-              Have account? Log in
-            </button>
           </mat-card-content>
         </mat-card>
       </form>

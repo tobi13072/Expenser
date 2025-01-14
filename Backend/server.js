@@ -9,7 +9,7 @@ import validateToken from './middleware/auth.js';
 
 dotenv.config();
 
-const PORT = process.env.SERVER_PORT;
+const PORT = process.env.PORT;
 
 // connecting to database
 database();

@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const CONNECTION_URL = '' //Add your connection string to MongoDB Atlas Database
+dotenv.config();
+
+const CONNECTION_URL = process.env.MONGODB_URI;
 
 function connect() {
     mongoose.connect(CONNECTION_URL, { useNewUrlParser: true})

@@ -1,4 +1,4 @@
-<div class="container" xmlns:p="http://www.w3.org/1999/html">
+<div class="container" [@fadeInOut]>
   <form class="form-sign-in" [formGroup]="signinForm" (ngSubmit)="loginUser()">
     <mat-card class="custom-shadow">
       <mat-card-header>
@@ -13,6 +13,9 @@
                 <input matInput formControlName="email" type="email">
                 <mat-error *ngIf="signinForm.controls['email'].hasError('required')">
                   Email is required
+                </mat-error>
+                <mat-error *ngIf="signinForm.controls['email'].hasError('email')">
+                  Invalid email format
                 </mat-error>
               </mat-form-field>
             </td>
@@ -31,20 +34,10 @@
           </tr>
 
           <tr>
-            <td>
-              <mat-error *ngIf="signinForm.hasError('email_or_password_invalid')">
-                Email or password is invalid
-              </mat-error>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <button mat-flat-button type="reset">Clear</button>
-              <button mat-flat-button type="submit">Sign in</button>
-              <div class="spacer"></div>
-              <button mat-flat-button *ngIf="!this.authService.isLoggedIn" routerLinkActive="active" routerLink="/sign-up">
-                Don't have account yet? Create one!
+            <td class="button-row">
+              <button mat-flat-button class="sign-in-button" type="submit" [disabled]="signinForm.invalid">Sign in</button>
+              <button mat-flat-button class="register-button" *ngIf="!this.authService.isLoggedIn" routerLinkActive="active" routerLink="/sign-up">
+                Create account
               </button>
             </td>
           </tr>

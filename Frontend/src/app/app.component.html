@@ -1,14 +1,15 @@
 <mat-toolbar class="mat-nav" xmlns="http://www.w3.org/1999/html">
-  <a *ngIf="this.authService.isLoggedIn" routerLink="/dashboard" routerLinkActive="active">
-    <span class="project-title">Expenser</span>
+  <a *ngIf="this.authService.isLoggedIn" routerLink="/dashboard" routerLinkActive="active" class="app-title">
+    <span>Expenser</span>
   </a>
 
-  <a *ngIf="this.authService.isLoggedIn" routerLink="/expenses" routerLinkActive="active">
-    <span class="project-title">Your expenses</span>
+  <a *ngIf="this.authService.isLoggedIn && !isExpensesRoute" routerLink="/expenses" routerLinkActive="active" class="nav-link">
+    <span>Your expenses</span>
   </a>
 
-  <button mat-icon-button *ngIf="this.authService.isLoggedIn" aria-label="Add Issue" (click)="openExpenseAddEditForm()">
+  <button mat-button *ngIf="this.authService.isLoggedIn && isExpensesRoute" class="nav-link add-button" (click)="openExpenseAddEditForm()">
     <mat-icon>add</mat-icon>
+    <span>Add expense</span>
   </button>
 
   <span class="example-spacer"></span>

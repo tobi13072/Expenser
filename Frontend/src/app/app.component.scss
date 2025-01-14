@@ -9,11 +9,66 @@
 .mat-nav a {
   text-decoration: none;
   color: inherit;
-  margin-right: 16px;
+  transition: all 0.3s ease;
 }
 
-.project-title {
-  font-size: 20px;
+.app-title {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-right: 24px;
+  
+  &:hover {
+    color: #ffa500;
+  }
+}
+
+.nav-link {
+  font-size: 14px;
+  padding: 0 16px;
+  border-radius: 4px;
+  background-color: #424242;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+  height: 32px;
+  color: white;
+  min-width: 100px;
+  justify-content: center;
+  
+  &:hover {
+    background-color: #505050;
+  }
+  
+  &.active {
+    background-color: #505050;
+  }
+
+  &.add-button {
+    border: none;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    line-height: normal;
+    background-color: #424242;
+    min-width: 100px;
+    
+    &:hover {
+      background-color: #505050;
+    }
+    
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      margin: 0;
+    }
+  }
+}
+
+.example-spacer {
+  flex: 1;
 }
 
 .mat-icon-button {
@@ -24,10 +79,6 @@
     background-color: #ffa500;
     color: #202124;
   }
-}
-
-.example-spacer {
-  flex: 1;
 }
 
 .mat-menu {

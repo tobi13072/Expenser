@@ -17,32 +17,40 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const { email, password } = req.body;
 
-  if (!User.findOne({ email })) {
-    res
-      .status(403)
-      .json({ message: `User with email: ${email} does not exists` });
+  const user = await User.findOne({ email });
+  
+  if (!user) {
+    return res.status(403).json({ 
+      success: false, 
+      message: `User with email: ${email} does not exist` 
+    });
   }
 
-  const user = await User.findOne({ email });
-  if (await bcrypt.compare(password, user.password)) {
-    const accessToken = jwt.sign(
-      {
-        user: {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          id: user.id,
-        },
-      },
-      process.env.ACCESS_TOKEN_SECRET,
-      {
-        expiresIn: "1h",
-      }
-    );
-    res.status(200).json({ success: true, accessToken });
-  } else {
-    res.status(200).json({success: false, message:"Email or password is not valid"});
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  if (!isPasswordValid) {
+    return res.status(401).json({
+      success: false, 
+      message: "Email or password is not valid"
+    });
   }
+
+  const accessToken = jwt.sign(
+    {
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        id: user.id,
+      },
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: "1h" }
+  );
+
+  return res.status(200).json({ 
+    success: true, 
+    accessToken 
+  });
 });
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -54,22 +62,42 @@ const registerUser = asyncHandler(async (req, res) => {
   // Business logic - registration
   const { firstName, lastName, email, password } = req.body;
 
-  if ((await User.findOne({ email })) !== null) {
-    res.status(200).json({ result: 0, message: "Email already exists" });
+  // Check if user already exists
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return res.status(400).json({ 
+      success: false,
+      message: "User with this email already exists" 
+    });
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-  let newUser = await User.create({
-    firstName,
-    lastName,
-    email,
-    password: hashedPassword,
-  });
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+    });
 
-  if (newUser) {
-    res.status(201).json({ result: 1, user: newUser});
-  } else {
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(201).json({ 
+      success: true,
+      result: 1,
+      user: newUser
+    });
+  } catch (error) {
+    // Handle MongoDB duplicate key error
+    if (error.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        message: "User with this email already exists"
+      });
+    }
+    
+    return res.status(500).json({ 
+      success: false,
+      message: "Internal server error" 
+    });
   }
 });
 

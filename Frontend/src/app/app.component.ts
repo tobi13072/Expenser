@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "./shared/auth.service";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationService, MenuItem } from "primeng/api";
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 import { CoreService } from "./core/core.service";
-import {ExpenseFormComponent} from "./components/expense-form/expense-form.component";
+import { ExpenseFormComponent } from "./components/expense-form/expense-form.component";
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,8 @@ import {ExpenseFormComponent} from "./components/expense-form/expense-form.compo
   providers: [ConfirmationService]
 })
 export class AppComponent implements OnInit {
-
   items!: MenuItem[];
+  isExpensesRoute: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -22,7 +23,13 @@ export class AppComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
     private _coreService: CoreService
-  ) { }
+  ) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      this.isExpensesRoute = event.url === '/expenses';
+    });
+  }
 
   ngOnInit() {
     this.items = [
@@ -35,6 +42,7 @@ export class AppComponent implements OnInit {
     this.authService.doLogout();
     this.router.navigate([""])
   }
+
   openExpenseAddEditForm() {
     const dialogRef = this._dialog.open(ExpenseFormComponent);
     dialogRef.afterClosed().subscribe({

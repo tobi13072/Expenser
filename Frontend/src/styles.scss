@@ -1,14 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~primeicons/primeicons.css';
-@import '~primeng/resources/themes/lara-light-blue/theme.css';
-@import '~primeng/resources/primeng.min.css';
-
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-body {
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   background: #202124;
-  font-family: var(--font-family);
+}
+
+/* Material Snackbar styles */
+.mat-snack-bar-container {
+  &.success-snackbar {
+    background: rgba(76, 175, 80, 0.9) !important;
+    backdrop-filter: blur(10px);
+    color: white;
+  }
+
+  &.error-snackbar {
+    background: rgba(244, 67, 54, 0.9) !important;
+    backdrop-filter: blur(10px);
+    color: white;
+  }
+
+  &.warning-snackbar {
+    background: rgba(255, 152, 0, 0.9) !important;
+    backdrop-filter: blur(10px);
+    color: white;
+  }
+
+  .mat-simple-snackbar {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 }
 

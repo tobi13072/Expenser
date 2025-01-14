@@ -20,7 +20,17 @@ export class AuthService {
   // Sign-up
   signUp(user: User): Observable<any> {
     let endpoint = `${this.base_url}/register`;
-    return this.http.post(endpoint, user).pipe(catchError(this.handleError))
+    return this.http.post(endpoint, user).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          // Client-side error
+          return throwError(() => error.error.message);
+        } else {
+          // Server-side error
+          return throwError(() => error.error);
+        }
+      })
+    );
   }
 
   signIn(user: User) {
@@ -69,8 +79,8 @@ export class AuthService {
     if (error.error instanceof ErrorEvent) {
       msg = error.error.message;
     } else {
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      msg = error.error;
     }
-    return throwError(msg);
+    return throwError(() => msg);
   }
 }

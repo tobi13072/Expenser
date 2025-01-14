@@ -11,38 +11,73 @@ mat-card {
   }
 }
 
-.form-sign-up {
-  margin-top: 15%;
-}
-
 .container {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  height: 100vh;
+  padding-top: 120px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-mat-card {
-  // background-color: lightgray;
+.form-sign-up {
+  width: 100%;
+  max-width: 400px;
+}
+
+.custom-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  
+  button {
+    flex: 1;
+    height: 45px;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .sign-up-button {
+    background-color: #1976d2;
+    color: white;
+
+    &:disabled {
+      background-color: rgba(0, 0, 0, 0.12);
+      color: rgba(0, 0, 0, 0.38);
+    }
+  }
+
+  .login-button {
+    background-color: #424242;
+    color: white;
+  }
 }
 
 mat-card-header {
   margin-bottom: 4%;
-  // background-color: lightgray;
 }
 
 mat-card-content {
-  // background-color: lightgray;
-  button {
-    margin-right: 2%;
-  }
-
   mat-form-field {
     min-width: 400px;
     width: 100%;
   }
 }
-
 
 mar-error {
   margin-bottom: 2%;

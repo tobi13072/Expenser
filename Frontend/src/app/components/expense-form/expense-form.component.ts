@@ -32,7 +32,6 @@ export class ExpenseFormComponent implements OnInit {
 
   ngOnInit() {
     this.expenseForm.patchValue(this.data);
-    console.log(this.data);
   }
 
   onSaveForm() {
