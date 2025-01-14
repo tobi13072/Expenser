@@ -3,9 +3,9 @@ import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-
 import User from "../models/User.js";
 import Expense from "../models/Expense.js";
+import { ACCESS_TOKEN_SECRET } from "../middleware/auth.js";
 
 dotenv.config();
 
@@ -43,7 +43,7 @@ const loginUser = asyncHandler(async (req, res) => {
         id: user.id,
       },
     },
-    process.env.ACCESS_TOKEN_SECRET,
+    ACCESS_TOKEN_SECRET,
     { expiresIn: "1h" }
   );
 
